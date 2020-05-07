@@ -15,6 +15,9 @@ import numpy as np
 import math
 import os
 
+from ExampleGenerator.Particle import Particle
+from ExampleGenerator.Event import Event 
+
 
 def normalize(array):
    norm = np.linalg.norm(array)
@@ -52,6 +55,7 @@ def generate_particles(n_particles, PtScale=100, etaLimit=2.7):
 
 def main():
 
+   output_directory = 'data' # a place to store the output files 
 
    # An example: generate a single event with 4 particles
    particles = generate_particles(4)
@@ -80,7 +84,10 @@ def main():
    nList = n_particles_in_event # hope this is the right thing to do
    from EventIsotropy.cylGen import ringGen, ringGenShift
    from EventIsotropy.emdVar import _cdist_phicos, emd_Calc
-   os.mkdir('data') # make a directory to store data files 
+
+   if not os.path.exists(output_directory):
+       os.makedirs(output_directory)
+
    for i in range(5):
        ringPoints1 = ringSample[i]
        ringPT1 = ringPtSample[i]
@@ -97,7 +104,7 @@ def main():
                M = _cdist_phicos(ringPoints1,ringPoints2)  # M is distance in phi according to 1 - cos phi metric
                emdval = emd_Calc(ringPT1, ringPT2, M) # so you pass energy weight of event 1, energy weight of event 2, and the distance matrix
                emdSpec.append(emdval)
-           f= open(f"data/emdRingtoRing_{i}_{j}.dat","w+")
+           f= open(f"{output_directory}/emdRingtoRing_{i}_{j}.dat","w+")
            for emdVal in emdSpec:
                f.write(str(emdVal)+ ' ')
            f.close()

@@ -1,3 +1,4 @@
+import numpy as np
 class Event():
    '''
    Store all of the particles in an event.
