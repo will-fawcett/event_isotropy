@@ -1,2 +1,3 @@
 *.dat
 *.pcy
+*__pycache__*
