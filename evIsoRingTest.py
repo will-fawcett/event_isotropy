@@ -13,13 +13,12 @@ import numpy as np
 import matplotlib.pylab as plt
 import random
 
-from cylGen import ringGen, ringGenShift
-from emdVar import _cdist_phicos, emd_Calc
+from EventIsotropy.cylGen import ringGen, ringGenShift
+from EventIsotropy.emdVar import _cdist_phicos, emd_Calc
 
 from matplotlib import rc
 from mpl_toolkits.mplot3d import Axes3D
 rc('text', usetex=True)
-from prettytable import PrettyTable
 
 ##############################
 

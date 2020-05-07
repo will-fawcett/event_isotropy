@@ -15,13 +15,12 @@ import numpy as np
 import matplotlib.pylab as plt
 import random
 
-from cylGen import cylinderGen
-from emdVar import _cdist_phi_y, emd_Calc
+from EventIsotropy.cylGen import cylinderGen
+from EventIsotropy.emdVar import _cdist_phi_y, emd_Calc
 
 from matplotlib import rc
 from mpl_toolkits.mplot3d import Axes3D
 rc('text', usetex=True)
-from prettytable import PrettyTable
 
 ##############################
 # Generate cylinders and pT lists

@@ -14,13 +14,12 @@ import warnings
 import numpy as np
 import matplotlib.pylab as plt
 
-from spherGen import sphericalGen, engFromVec
-from emdVar import _cdist_cos, emd_Calc
+from EventIsotropy.spherGen import sphericalGen, engFromVec
+from EventIsotropy.emdVar import _cdist_cos, emd_Calc
 
 from matplotlib import rc
 from mpl_toolkits.mplot3d import Axes3D
 rc('text', usetex=True)
-from prettytable import PrettyTable
 
 ############################################
 ## Specify input file
