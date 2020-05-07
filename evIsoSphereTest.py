@@ -24,7 +24,7 @@ rc('text', usetex=True)
 ############################################
 ## Specify input file
 if len(sys.argv)<3:
-    print 'Error: user did not specify input file and sphere index'
+    print('Error: user did not specify input file and sphere index')
     sys.exit(2)
 
 ## Generate spherical sample
@@ -34,7 +34,7 @@ sphereEng = np.array([engFromVec(sphereSample[j]) for j in range(5)])
 ## Choose sphere n points
 sphInd = int(sys.argv[2])
 if sphInd>5:
-    print 'Warning! You are generating a sphere with'+str(12*(4**sphInd))+' particles. This is an extremely long calculation time'
+    print('Warning! You are generating a sphere with'+str(12*(4**sphInd))+' particles. This is an extremely long calculation time')
 
 spherePoints1 = sphereSample[sphInd]
 sphereEng1 = sphereEng[sphInd]
@@ -54,10 +54,10 @@ while nextline[0:7]=="<event>":
     nextline=file.readline()
     while nextline[0:8]!="</event>":
         particle = [float(n) for n in nextline.split()]
-            eng, px, py, pz = particle[0], particle[1], particle[2], particle[3]   
-            if eng > 1e-05:
-                momenta.append(np.array([px, py, pz]))
-                engL.append(eng)
+        eng, px, py, pz = particle[0], particle[1], particle[2], particle[3]   
+        if eng > 1e-05:
+            momenta.append(np.array([px, py, pz]))
+            engL.append(eng)
         nextline = file.readline()
     nextline=file.readline()
         
