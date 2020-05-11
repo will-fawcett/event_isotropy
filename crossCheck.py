@@ -34,23 +34,41 @@ def generate_particles(n_particles, PtScale=100, etaLimit=2.7):
    The pT values are generated from a falling exponential, the phi values from a flat distribution from [-pi,pi] and the eta values from a normal distribution constrained by |eta| < etaLimit.
    '''
 
-   phis = np.random.uniform(low=-math.pi, high=math.pi, size=n_particles)
-   pts = np.random.exponential(size=n_particles, scale=PtScale)
+   #phis = np.random.uniform(low=0, high=2*math.pi, size=n_particles)
+   phis = np.random.uniform(low=-math.pi, high=math.pi, size=n_particles-1)
+   pts = np.random.exponential(size=n_particles-1, scale=PtScale)
 
    # not actually that bad of an approximation, although pT should be correlated but whatever
    etas = []
-   while( len(etas) < n_particles):
+   while( len(etas) < n_particles-1):
       eta = np.random.normal(loc=0.0, scale=1.5)
       if abs(eta) < etaLimit:
          etas.append(eta)
-      if len(etas) == n_particles:
+      if len(etas) == n_particles-1:
          break
 
    particles = []
-   for i in range(n_particles):
+   NegEtMiss = Particle(0,0,0)
+   for i in range(n_particles-1):
       temp = Particle(pts[i], etas[i], phis[i])
       particles.append(temp)
+      NegEtMiss += temp
+
+   # Make sure vector sum of pT = 0
+   print('NegEtMiss', NegEtMiss)
+   EtMiss = Particle(NegEtMiss.pt, 0, NegEtMiss.phi + math.pi)
+   print('MET', EtMiss)
+   particles.append(EtMiss)
+
+   ptsum = Particle(0,0,0)
+   for part in particles:
+      ptsum += part
+   print('result', ptsum)
+
+
+   
    return particles
+
 
 
 def main():
